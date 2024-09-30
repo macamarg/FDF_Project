@@ -20,7 +20,17 @@
 
 #define HEIGTH 1000
 #define WIGTH 1000
-
+#define SDT_COLOR 0xf8f8f8
+#define CIANO 0x56c7c5
+#define LIME_25 0x3bfc41
+#define BULE 0x324ccd
+#define ORANGE 0xff8b00
+#define YELLOW 0xffe957
+#define STD_ANG 0.523599
+#define X_ANGLE 0.523599
+#define Y_ANGLE 0.523599
+#define OFFSET_X HEIGTH/2
+#define OFFSET_Y HEIGTH/2
 
 typedef struct	s_data
 {
@@ -36,18 +46,22 @@ typedef	struct s_map
 	int			fd;
 	char		*line;
 	char		**line_spl;
-	int			line_count;
-	int			row_n;
+	int			lines;
+	int			rows;
 	int			**map_decoded;
 	int			**map_color;
 	int			i;
 	int			j;
 	int			z;
-	int			*range_z;//0 = min, 1 = max
+	int			z_max;
+	int			z_min;
 	float		***map_2d;
 	float		x_f;
 	float		y_f;
-	int			*z_scale;
+	int			z_scale;
+	int			zoom;
+	int			rotation;
+	int			shift;
 }				t_map;
 
 typedef struct	s_vars
@@ -65,17 +79,27 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned long color);
 
 //hooks
 int		mouse_hook(int keycode);
-int		kill_vars(t_vars *vars);
-int		key_hook(int keycode, t_vars *vars);
+int		kill_vars(t_vars vars);
+int		key_hook(int keycode, t_vars vars);
+
+
+//main
+void 	ft_fdf(int fd, char * map_file);
+int		check_mapextension(char *map_file);
+int		fdf_exit(char *msg, int n_error);
+void	free_arr(char **array, int i);
 
 //maps
-int		is_info(char c);
+t_map	get_map(t_map *map, int fd, char *map_file);
 int		fdf_word_count(char *line);
-void	*map_line_count(t_map *map, char *map_addr);
-void	free_arr(char **array, int i);
-void 	*get_map(t_map *map, char *map_addr);
+int 	fdf_check_format(t_map *map, int fd);
+int		is_info(char c);
+void	fill_maptap(t_map *map);
+
 int		find_color(char *str);
 int		g_color(char *str);
+
+//convert map into info to draw image
 void	*convert_map(t_map	*map);
 void	*range_of_z(t_map	*map);
 

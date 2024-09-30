@@ -13,11 +13,12 @@
 NAME = fdf_2024_09_16
 
 SRC = fdf_main.c\
-	get_map.c\
+	fdf_map.c\
+	fdf_map_convert.c\
 	fdf_hooks.c\
+	fdf_color.c\
 	fdf_drawmap.c\
 	fdf_free_map.c\
-	map_convert.c\
 
 SRC_BONUS = 
 
