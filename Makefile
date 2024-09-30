@@ -6,18 +6,18 @@
 #    By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/04 11:08:14 by macamarg          #+#    #+#              #
-#    Updated: 2024/09/17 12:23:57 by macamarg         ###   ########.fr        #
+#    Updated: 2024/09/30 15:42:48 by macamarg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf_2024_09_16
+NAME = fdf
 
 SRC = fdf_main.c\
 	fdf_map.c\
-	fdf_map_convert.c\
+	fdf_map_covert.c\
 	fdf_hooks.c\
 	fdf_color.c\
-	fdf_drawmap.c\
+	fdf_draw.c\
 	fdf_free_map.c\
 
 SRC_BONUS = 
@@ -28,7 +28,7 @@ WFLAGS = -Wall -Wextra -Werror -g
 
 FLAGS = -lmlx_Linux -lX11 -lXext -lm
 
-LIB =  -L./minilibx-linux
+LIB =  -L../../minilibx-linux
 
 LIBFT_A = ./libft/libft.a
 

@@ -1,11 +1,20 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_map_covert.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/30 12:53:45 by macamarg          #+#    #+#             */
+/*   Updated: 2024/09/30 13:25:12 by macamarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 
-
 void	*convert_map(t_map	*map)
 {
-	ft_printf("map convert\n");fflush(stdout);
+	ft_printf ("map convert\n");
 	map->map_2d = (float ***)ft_calloc(map->lines, sizeof(float **));
 	map->i = -1;
 	while (++map->i < map->lines)
@@ -18,8 +27,8 @@ void	*convert_map(t_map	*map)
 			map->x_f = (map->i - map->j) * cosf(STD_ANG);
 			map->y_f = (map->i + map->j) * sinf(STD_ANG);
 			map->y_f -= map->map_decoded[map->i][map->i];
-			map->map_2d[map->i][map->j][0] = 25 * map->x_f + OFFSET_X;
-			map->map_2d[map->i][map->j][1] = 25 * map->y_f + OFFSET_Y;
+			map->map_2d[map->i][map->j][0] = map->z_scale * map->x_f + OFFSET_X;
+			map->map_2d[map->i][map->j][1] = map->z_scale * map->y_f + OFFSET_Y;
 		}
 	}
 	return (map);

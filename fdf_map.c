@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/30 12:53:37 by macamarg          #+#    #+#             */
+/*   Updated: 2024/09/30 15:57:25 by macamarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 
@@ -34,22 +44,25 @@ int	fdf_word_count(char *line)
 	return (count);
 }
 
-int fdf_check_format(t_map *map, int fd)
+int	fdf_check_format(t_map *map, int fd)
 {
 	int	row_conf;
 
 	map->lines = 0;
-	map->line = get_next_line(map->fd);
+	map->line = NULL;
+	map->line = get_next_line(fd);
+	ft_printf("%s\n", map->line);
 	while (map->line != NULL)
 	{
 		map->rows = fdf_word_count(map->line);
 		if (map->lines == 0)
 			row_conf = map->rows;
 		if (row_conf != map->rows)
-			return(0);
+			return (0);
 		map->lines++;
 		free(map->line);
 		map->line = get_next_line(map->fd);
+		ft_printf("%i\n", map->lines);
 	}
 	close(fd);
 	return (1);
@@ -57,7 +70,7 @@ int fdf_check_format(t_map *map, int fd)
 
 void	fill_maptap(t_map *map)
 {
-	while (++map->i < map->line)
+	while (++map->i < map->lines)
 	{
 		map->line = get_next_line (map->fd);
 		map->map_decoded[map->i] = (int *)ft_calloc(map->rows, sizeof(int *));
@@ -84,15 +97,17 @@ void	fill_maptap(t_map *map)
 
 t_map	*get_map(t_map *map, int fd, char *map_file)
 {
-	map = ft_calloc(1, sizeof(t_map));
+	map = ft_calloc(1, sizeof(t_map *));
 	if (!map)
 		fdf_exit("Fail to allocate map\n", 4);
+	ft_printf("map allocated\n");
 	if (fdf_check_format(map, fd) == 0)
 	{
 		free(map);
 		close(fd);
-		fdf_exit("Map in the worng format\n", 5);
+		fdf_exit("Map in the wrong format\n", 5);
 	}
+	ft_printf("map checked\n");
 	map->map_decoded = (int **)ft_calloc(map->lines, sizeof(int *));
 	map->map_color = (int **)ft_calloc(map->lines, sizeof(int *));
 	map->i = -1;
@@ -103,6 +118,7 @@ t_map	*get_map(t_map *map, int fd, char *map_file)
 	map->zoom = 1;
 	fill_maptap (map);
 	close (map->fd);
-	fdf_map_convert(map);
+	map->z_max = map->z_max - map->z_min;
+	convert_map(map);
 	return (map);
 }
