@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:53:37 by macamarg          #+#    #+#             */
-/*   Updated: 2024/09/30 15:57:25 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:06:59 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,22 @@ int	fdf_check_format(t_map *map, int fd)
 	int	row_conf;
 
 	map->lines = 0;
-	map->line = NULL;
 	map->line = get_next_line(fd);
-	ft_printf("%s\n", map->line);
+	ft_printf("%s\n", map->line);fflush(stdout);
 	while (map->line != NULL)
 	{
+		ft_printf("teste \n\n\n");fflush(stdout);
 		map->rows = fdf_word_count(map->line);
+		ft_printf("teste\n");fflush(stdout);
 		if (map->lines == 0)
 			row_conf = map->rows;
-		if (row_conf != map->rows)
+		else if (row_conf != map->rows)
 			return (0);
 		map->lines++;
-		free(map->line);
+		//ft_printf("%i\n", map->lines);
+		//free(map->line);
 		map->line = get_next_line(map->fd);
-		ft_printf("%i\n", map->lines);
+		ft_printf("%i\n", fd);
 	}
 	close(fd);
 	return (1);
@@ -97,13 +99,11 @@ void	fill_maptap(t_map *map)
 
 t_map	*get_map(t_map *map, int fd, char *map_file)
 {
-	map = ft_calloc(1, sizeof(t_map *));
-	if (!map)
-		fdf_exit("Fail to allocate map\n", 4);
-	ft_printf("map allocated\n");
+	map->line = NULL;
 	if (fdf_check_format(map, fd) == 0)
 	{
-		free(map);
+		if (map)
+			free(map);
 		close(fd);
 		fdf_exit("Map in the wrong format\n", 5);
 	}
@@ -114,7 +114,6 @@ t_map	*get_map(t_map *map, int fd, char *map_file)
 	map->z_max = 0;
 	map->z_min = 0;
 	map->fd = open (map_file, O_RDONLY);
-	map->line = NULL;
 	map->zoom = 1;
 	fill_maptap (map);
 	close (map->fd);

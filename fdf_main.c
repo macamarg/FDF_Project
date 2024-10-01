@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:26:43 by macamarg          #+#    #+#             */
-/*   Updated: 2024/09/30 15:50:21 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:04:20 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	ft_fdf(int fd, char *map_file)
 	t_vars	vars;
 
 	ft_printf("map check\n");
+	ft_printf("%i\n", fd);
+	vars.map = ft_calloc(1, sizeof(t_map *));
+	if (!vars.map)
+		fdf_exit("Fail to allocate map\n", 4);
 	vars.map = get_map(vars.map, fd, map_file);
 	ft_printf("map created");
 	vars.mlx = mlx_init();
@@ -73,10 +77,11 @@ int	main(int argc, char **argv)
 	{
 		if (check_mapextension (argv[1]) == 0)
 			fdf_exit ("Wrong file extension\n", 2);
-		if ((fd = open (argv[1], O_RDONLY)) < 0)
+		fd = open (argv[1], O_RDONLY);
+		if ((fd <= 0))
 			fdf_exit ("Error openning file\n", 3);
-		else
-			ft_fdf (fd, argv[1]);
+		ft_printf("%i\n", fd);
+		ft_fdf (fd, argv[1]);
 	}
 	else
 		fdf_exit ("run like ./fdf <map name>.fdf\n", 1);

@@ -22,6 +22,10 @@
 # include <limits.h>
 # include <stdarg.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
 typedef struct s_list
 {
 	void			*content;
@@ -104,5 +108,16 @@ void			ft_stackadd_back(t_stack **lst, t_stack *new);
 t_stack			*ft_stacklast(t_stack **lst);
 int				ft_stacklen(t_stack **stack_a);
 long			ft_atol(const char *nptr);
+
+//get_next_line
+
+char			*get_next_line(int fd);
+char			*ft_strjoin_gnl(char *s1, char *s2);
+int				ft_strlen_gnl(char *s);
+int				ft_is_newline(char *str);
+void			*ft_clean(char *current_line, char *read_content);
+
+//fdf
+int				ft_atoi_base(const char *str, int str_base);
 
 #endif
