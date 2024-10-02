@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:26:43 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/02 14:22:29 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:53:16 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ void	ft_fdf(int fd, char *map_file)
 	if (!map)
 		fdf_exit("Fail to allocate map\n", 4);
 	initiate_map(map);
-	ft_printf("get reated\n");
 	map = get_map(map, fd, map_file);
-	ft_printf("map created\n");
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIGTH, HEIGTH, "FDF");
 	vars.img.img = mlx_new_image(vars.mlx, WIGTH, HEIGTH);
 	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
 			&vars.img.line_length, &vars.img.endian);
 	vars.map = map;
-	fdf_mapdraw(&vars);
+	//fdf_mapdraw(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);//pq 0, 0??
 	mlx_hook(vars.win, 17, 0, kill_vars, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);

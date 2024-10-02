@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:53:45 by macamarg          #+#    #+#             */
-/*   Updated: 2024/09/30 13:25:12 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:52:51 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	*convert_map(t_map	*map)
 			map->map_2d[map->i][map->j][1] = map->z_scale * map->y_f + OFFSET_Y;
 		}
 	}
+	ft_printf("map converted\n");
 	return (map);
 }
