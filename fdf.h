@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:27:31 by macamarg          #+#    #+#             */
-/*   Updated: 2024/09/30 15:39:44 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:46:02 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_fdf(int fd, char *map_file);
 int		check_mapextension(char *map_file);
 int		fdf_exit(char *msg, int n_error);
 void	free_arr(char **array, int i);
+void	 initiate_map(t_map *map);
 
 //maps
 t_map	*get_map(t_map *map, int fd, char *map_file);

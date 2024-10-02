@@ -6,7 +6,7 @@
 #    By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/04 11:08:14 by macamarg          #+#    #+#              #
-#    Updated: 2024/09/30 15:42:48 by macamarg         ###   ########.fr        #
+#    Updated: 2024/10/02 13:45:34 by macamarg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_BONUS =
 
 LIBFT_DIR = ./libft
 
-WFLAGS = -Wall -Wextra -Werror -g
+WFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 FLAGS = -lmlx_Linux -lX11 -lXext -lm
 

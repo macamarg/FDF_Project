@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:53:37 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/01 15:06:59 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:39:13 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	fdf_check_format(t_map *map, int fd)
 {
 	int	row_conf;
 
-	map->lines = 0;
+	// map->lines = 0;
+	// map->line = NULL;
+	ft_printf("map check\n\n");fflush(stdout);
+	ft_printf("%i\n", fd);fflush(stdout);
 	map->line = get_next_line(fd);
 	ft_printf("%s\n", map->line);fflush(stdout);
 	while (map->line != NULL)
@@ -61,8 +64,8 @@ int	fdf_check_format(t_map *map, int fd)
 		else if (row_conf != map->rows)
 			return (0);
 		map->lines++;
-		//ft_printf("%i\n", map->lines);
-		//free(map->line);
+		ft_printf("%i\n", map->lines);
+		free(map->line);
 		map->line = get_next_line(map->fd);
 		ft_printf("%i\n", fd);
 	}
@@ -100,6 +103,7 @@ void	fill_maptap(t_map *map)
 t_map	*get_map(t_map *map, int fd, char *map_file)
 {
 	map->line = NULL;
+	ft_printf("line %s\n", map->line);
 	if (fdf_check_format(map, fd) == 0)
 	{
 		if (map)
@@ -110,13 +114,9 @@ t_map	*get_map(t_map *map, int fd, char *map_file)
 	ft_printf("map checked\n");
 	map->map_decoded = (int **)ft_calloc(map->lines, sizeof(int *));
 	map->map_color = (int **)ft_calloc(map->lines, sizeof(int *));
-	map->i = -1;
-	map->z_max = 0;
-	map->z_min = 0;
-	map->fd = open (map_file, O_RDONLY);
-	map->zoom = 1;
+	fd = open (map_file, O_RDONLY);
 	fill_maptap (map);
-	close (map->fd);
+	close (fd);
 	map->z_max = map->z_max - map->z_min;
 	convert_map(map);
 	return (map);
