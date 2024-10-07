@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:53:37 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/02 14:51:12 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:25:48 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ int	fdf_check_format(t_map *map, int fd)
 	map->line = get_next_line(fd);
 	while (map->line != NULL)
 	{
-		ft_printf("%i %s\n", map->lines, map->line);
 		row_conf = fdf_word_count(map->line);
 		if (map->lines == 0)
 			map->rows = row_conf;
 		else if (map->rows != row_conf)
-			return (0);
+		{
+			free(map->line);
+			return (0);	
+		}
 		map->lines++;
 		free(map->line);
 		map->line = get_next_line(fd);
@@ -79,7 +81,6 @@ void	fill_maptap(t_map *map)
 		while (++map->j < map->rows)
 		{
 			map->map_decoded[map->i][map->j] = ft_atoi (map->line_spl[map->j]);
-			ft_printf("%i ", map->map_decoded[map->i][map->j]);
 			if (find_color(map->line_spl[map->j]) == 1)
 				map->map_color[map->i][map->j] = g_color(map->line_spl[map->j]);
 			else
@@ -89,7 +90,6 @@ void	fill_maptap(t_map *map)
 			if (map->map_decoded[map->i][map->j] < map->z_min)
 				map->z_min = map->map_decoded[map->i][map->j];
 		}
-		ft_printf("\n");
 		free_arr (map->line_spl, map->rows - 1);
 		free (map->line);
 	}
@@ -110,7 +110,9 @@ t_map	*get_map(t_map *map, int fd, char *map_file)
 	map->fd = open (map_file, O_RDONLY);
 	fill_maptap (map);
 	close (map->fd);
-	map->scale = map->z_max - map->z_min;
+	map->scale = (map->z_max - map->z_min);
+	map->x_scale = (100 * map->lines)/ WIGTH;
+	map->y_scale = (100* map->rows) / HEIGTH;
 	convert_map(map);
 	return (map);
 }

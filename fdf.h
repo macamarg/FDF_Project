@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:27:31 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/02 11:46:02 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:33:50 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "./libft/libft.h"
 # include <math.h>
 
-# define HEIGTH 1000
-# define WIGTH 1000
+# define HEIGTH 1080
+# define WIGTH 1080
 # define SDT_COLOR 0xf8f8f8
 # define CIANO 0x56c7c5
 # define LIME_25 0x3bfc41
@@ -29,8 +29,8 @@
 # define STD_ANG 0.523599
 # define X_ANGLE 0.523599
 # define Y_ANGLE 0.523599
-# define OFFSET_X 500
-# define OFFSET_Y 500
+# define OFFSET_X 400
+# define OFFSET_Y 400
 
 typedef struct s_data
 {
@@ -40,6 +40,23 @@ typedef struct s_data
 	int			line_length;
 	int			endian;
 }				t_data;
+
+typedef struct s_draw
+{
+	int				i;
+	int				j;
+	int				stepx;
+	int				stepy;
+	int				*s;
+	int				*e;
+	unsigned long	*color;
+	int				dx;
+	int				dy;
+	int				err;
+	int				e2;
+	int 			sx;
+	int 			sy;
+}				t_draw;
 
 typedef struct s_map
 {
@@ -63,6 +80,8 @@ typedef struct s_map
 	int			end_x;
 	int			end_y;
 	int			scale;
+	int			x_scale;
+	int			y_scale;
 	int			zoom;
 	int			rotation;
 	int			shift;
@@ -79,12 +98,15 @@ typedef struct s_vars
 //image
 void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned long color);
 void	fdf_mapdraw(t_vars *vars);
+void	draw_line(t_vars *vars, t_draw dm);
+void	draw_hor(t_vars *vars, t_draw dm);
+void	draw_vert(t_vars *vars, t_draw dm);
 //void	creat_image(t_vars	*vars);
 
 //hooks
 int		mouse_hook(int keycode);
-int		kill_vars(t_vars vars);
-int		key_hook(int keycode, t_vars vars);
+int		kill_vars(t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 
 //main
 void	ft_fdf(int fd, char *map_file);

@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:53:45 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/02 14:52:51 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:20:16 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,13 @@ void	*convert_map(t_map	*map)
 		map->j = -1;
 		while (++map->j < map->rows)
 		{
-			//ft_printf("\n%i %i \n", map->i, map->j);
 			map->map_2d[map->i][map->j] = ft_calloc(2, sizeof(float));
 			map->xf = (map->i - map->j) * cosf(STD_ANG);
 			map->yf = (map->i + map->j) * sinf(STD_ANG);
-			map->yf -= map->map_decoded[map->i][map->j];
-			//printf("%f %f %i\n", map->x_f, map->y_f, map->z_scale);
-			map->map_2d[map->i][map->j][0] = (3*map->scale * map->xf) + OFFSET_X;
-			map->map_2d[map->i][map->j][1] = (3 *map->scale * map->yf) + OFFSET_Y;
-			//printf("%f %f  ", map->map_2d[map->i][map->j][0], map->map_2d[map->i][map->j][1]);fflush(stdout);		
+			map->yf -= 0.1 *map->map_decoded[map->i][map->j];
+			map->map_2d[map->i][map->j][0] = (3 * map->x_scale * map->scale * map->xf) + OFFSET_X;
+			map->map_2d[map->i][map->j][1] = (4 * map->y_scale * map->scale * map->yf) + OFFSET_Y;
 		}
-		//ft_printf("\n");
 	}
 	ft_printf("map converted\n");
 	return (map);
