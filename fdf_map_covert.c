@@ -23,13 +23,17 @@ void	*convert_map(t_map	*map)
 		map->j = -1;
 		while (++map->j < map->rows)
 		{
+			//ft_printf("\n%i %i \n", map->i, map->j);
 			map->map_2d[map->i][map->j] = ft_calloc(2, sizeof(float));
-			map->x_f = (map->i - map->j) * cosf(STD_ANG);
-			map->y_f = (map->i + map->j) * sinf(STD_ANG);
-			map->y_f -= map->map_decoded[map->i][map->i];
-			map->map_2d[map->i][map->j][0] = map->z_scale * map->x_f + OFFSET_X;
-			map->map_2d[map->i][map->j][1] = map->z_scale * map->y_f + OFFSET_Y;
+			map->xf = (map->i - map->j) * cosf(STD_ANG);
+			map->yf = (map->i + map->j) * sinf(STD_ANG);
+			map->yf -= map->map_decoded[map->i][map->j];
+			//printf("%f %f %i\n", map->x_f, map->y_f, map->z_scale);
+			map->map_2d[map->i][map->j][0] = (3*map->scale * map->xf) + OFFSET_X;
+			map->map_2d[map->i][map->j][1] = (3 *map->scale * map->yf) + OFFSET_Y;
+			//printf("%f %f  ", map->map_2d[map->i][map->j][0], map->map_2d[map->i][map->j][1]);fflush(stdout);		
 		}
+		//ft_printf("\n");
 	}
 	ft_printf("map converted\n");
 	return (map);

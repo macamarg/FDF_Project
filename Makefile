@@ -28,7 +28,7 @@ WFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 FLAGS = -lmlx_Linux -lX11 -lXext -lm
 
-LIB =  -L../../minilibx-linux
+LIB =  -L./minilibx-linux
 
 LIBFT_A = ./libft/libft.a
 

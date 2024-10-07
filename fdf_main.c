@@ -15,21 +15,31 @@
 void	ft_fdf(int fd, char *map_file)
 {
 	t_vars	vars;
-	t_map	*map;
+	
 
 	ft_printf("fdf function\n");
-	map = malloc(sizeof(t_map));
-	if (!map)
+	vars.map = malloc(sizeof(t_map));
+	if (!vars.map)
 		fdf_exit("Fail to allocate map\n", 4);
-	initiate_map(map);
-	map = get_map(map, fd, map_file);
+	initiate_map(vars.map);
+	vars.map = get_map(vars.map, fd, map_file);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIGTH, HEIGTH, "FDF");
 	vars.img.img = mlx_new_image(vars.mlx, WIGTH, HEIGTH);
 	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
 			&vars.img.line_length, &vars.img.endian);
-	vars.map = map;
-	//fdf_mapdraw(&vars);
+	fdf_mapdraw(&vars);
+	// int i = 100;
+	// int	j = 100;
+	// while(i < 200)
+	// {
+	// 	//mlx_pixel_put(mlx, mlx_win, 200 + i, 200 + j, 0xff0000);
+	// 	my_mlx_pixel_put(&vars.img, i, j, 0xff0000);
+	// 	my_mlx_pixel_put(&vars.img, 200+i, j, 0x00ffff);
+	// 	my_mlx_pixel_put(&vars.img, i, 200+j, 0x0000ff);
+	// 	j++;
+	// 	i++;
+	// }
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);//pq 0, 0??
 	mlx_hook(vars.win, 17, 0, kill_vars, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);

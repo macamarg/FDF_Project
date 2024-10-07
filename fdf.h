@@ -13,8 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include "../../minilibx-linux/mlx.h"
-# include "../../minilibx-linux/mlx_int.h"
+# include "./minilibx-linux/mlx.h"
+# include "./minilibx-linux/mlx_int.h"
 # include "./libft/libft.h"
 # include <math.h>
 
@@ -56,9 +56,13 @@ typedef struct s_map
 	int			z_max;
 	int			z_min;
 	float		***map_2d;
-	float		x_f;
-	float		y_f;
-	int			z_scale;
+	float		xf;
+	float		yf;
+	int			start_x;
+	int			start_y;
+	int			end_x;
+	int			end_y;
+	int			scale;
 	int			zoom;
 	int			rotation;
 	int			shift;

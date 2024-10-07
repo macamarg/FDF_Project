@@ -48,7 +48,7 @@ int	fdf_check_format(t_map *map, int fd)
 {
 	int	row_conf;
 
-	ft_printf("map check\n\n");fflush(stdout);
+	ft_printf("map check\n\n");
 	map->line = get_next_line(fd);
 	while (map->line != NULL)
 	{
@@ -68,6 +68,7 @@ int	fdf_check_format(t_map *map, int fd)
 
 void	fill_maptap(t_map *map)
 {
+	ft_printf("map decode\n");
 	while (++map->i < map->lines)
 	{
 		map->line = get_next_line (map->fd);
@@ -78,7 +79,7 @@ void	fill_maptap(t_map *map)
 		while (++map->j < map->rows)
 		{
 			map->map_decoded[map->i][map->j] = ft_atoi (map->line_spl[map->j]);
-			//map->map_color[map->i][map->j] = ft_atoi (map->line_spl[map->j]);
+			ft_printf("%i ", map->map_decoded[map->i][map->j]);
 			if (find_color(map->line_spl[map->j]) == 1)
 				map->map_color[map->i][map->j] = g_color(map->line_spl[map->j]);
 			else
@@ -88,6 +89,7 @@ void	fill_maptap(t_map *map)
 			if (map->map_decoded[map->i][map->j] < map->z_min)
 				map->z_min = map->map_decoded[map->i][map->j];
 		}
+		ft_printf("\n");
 		free_arr (map->line_spl, map->rows - 1);
 		free (map->line);
 	}
@@ -95,8 +97,6 @@ void	fill_maptap(t_map *map)
 
 t_map	*get_map(t_map *map, int fd, char *map_file)
 {
-	map->line = NULL;
-	ft_printf("line %s\n", map->line);
 	if (fdf_check_format(map, fd) == 0)
 	{
 		if (map)
@@ -110,7 +110,7 @@ t_map	*get_map(t_map *map, int fd, char *map_file)
 	map->fd = open (map_file, O_RDONLY);
 	fill_maptap (map);
 	close (map->fd);
-	map->z_max = map->z_max - map->z_min;
+	map->scale = map->z_max - map->z_min;
 	convert_map(map);
 	return (map);
 }
