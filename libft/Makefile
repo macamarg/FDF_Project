@@ -6,7 +6,7 @@
 #    By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 11:43:48 by macamarg          #+#    #+#              #
-#    Updated: 2024/10/02 13:45:40 by macamarg         ###   ########.fr        #
+#    Updated: 2024/10/09 11:59:00 by macamarg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRC = ft_isalpha.c\
 	exit_error.c\
 	ft_atol.c\
 	ft_atoi_base.c\
+	ft_atol_base.c\
 	get_next_line.c\
 	get_next_line_utils.c\
 

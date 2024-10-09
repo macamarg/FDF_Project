@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:54:07 by macamarg          #+#    #+#             */
-/*   Updated: 2024/09/30 13:02:08 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:57:04 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	find_color(char *str)
 	return (0);
 }
 
-int	g_color(char *str)
+unsigned long	g_color(char *str)
 {
 	char	*temp;
 	int		result;
@@ -37,7 +37,7 @@ int	g_color(char *str)
 	{
 		if (*temp == 'x')
 		{
-			result = ft_atoi_base (++temp, 16);
+			result = ft_atol_base (++temp, 16);
 		}
 		temp++;
 	}

@@ -119,5 +119,6 @@ void			*ft_clean(char *current_line, char *read_content);
 
 //fdf
 int				ft_atoi_base(const char *str, int str_base);
+unsigned long	ft_atol_base(const char *str, int str_base);
 
 #endif

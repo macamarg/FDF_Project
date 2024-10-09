@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:26:43 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/07 13:30:13 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:57:54 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void initiate_map(t_map *map)
 	map->z_max = 0;
 	map->z_min = 0;
 	map->zoom = 1;
-	
+	map->x_max = 0;
+	map->y_max = 0;
+	map->x_min = 0;
+	map->y_min = 0;
 }
 
 int	check_mapextension(char *map_file)
