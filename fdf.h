@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:27:31 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/09 12:08:59 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:01:16 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define HEIGTH 1080
 # define WIGTH 1080
-# define SDT_COLOR 0xf8f8f8
+# define STD_COLOR 0xf8f8f8
 # define CIANO 0x56c7c5
 # define LIME_25 0x3bfc41
 # define BULE 0x324ccd
@@ -66,7 +66,7 @@ typedef struct s_map
 	int				lines;
 	int				rows;
 	int				**map_decoded;
-	unsigned long	**map_color;
+	unsigned long	***map_color;
 	int				i;
 	int				j;
 	int				z;
@@ -89,6 +89,7 @@ typedef struct s_map
 	int				x_scale;
 	int				y_scale;
 	int				zoom;
+	int				hills;
 	int				rotation;
 	int				shift;
 }					t_map;
@@ -114,6 +115,10 @@ int		mouse_hook(int keycode);
 int		kill_vars(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 
+//modify
+void	fdf_uphills(t_vars *vars);
+void	fdf_downhills(t_vars *vars);
+
 //main
 void	ft_fdf(int fd, char *map_file);
 int		check_mapextension(char *map_file);
@@ -138,7 +143,7 @@ void	*range_of_z(t_map	*map);
 //freemap
 void 	free_map(t_map *map);
 void 	free_2d_int(int **arr, int lines);
-void 	free_2d_long(unsigned long **arr, int lines);
-void	 free_3d_float(float ***arr, int lines, int rows);
+void 	free_3d_long(unsigned long ***arr, int lines, int rows);
+void	free_3d_float(float ***arr, int lines, int rows);
 
 #endif

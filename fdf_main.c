@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:26:43 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/08 11:57:54 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:25:45 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_fdf(int fd, char *map_file)
 	vars.img.img = mlx_new_image(vars.mlx, WIGTH, HEIGTH);
 	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
 			&vars.img.line_length, &vars.img.endian);
+	ft_printf("fdf drawing\n");
 	fdf_mapdraw(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);//pq 0, 0??
 	mlx_hook(vars.win, 17, 0, kill_vars, &vars);
@@ -44,6 +45,7 @@ void initiate_map(t_map *map)
 	map->z_max = 0;
 	map->z_min = 0;
 	map->zoom = 1;
+	map->hills = 1;
 	map->x_max = 0;
 	map->y_max = 0;
 	map->x_min = 0;

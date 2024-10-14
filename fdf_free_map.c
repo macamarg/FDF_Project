@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:06:52 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/09 12:10:50 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:00:37 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void free_map(t_map *map)
 	if(map->map_decoded)
 	{
 		free_2d_int(map->map_decoded, map->lines);
-		free_2d_long(map->map_color, map->lines);
+		free_3d_long(map->map_color, map->lines, map->rows);
 	}
 	if(map->map_2d)
 		free_3d_float(map->map_2d, map->lines, map->rows);
@@ -36,13 +36,19 @@ void free_2d_int(int **arr, int lines)
 	free(arr);
 }
 
-void free_2d_long(unsigned long **arr, int lines)
+void free_3d_long(unsigned long ***arr, int lines, int rows)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < lines)
-		free(arr[i]);
+	{
+		j = -1;
+		while (++j < rows)
+			free(arr[i][j]);
+		free(arr[i]);	
+	}
 	free(arr);
 }
 

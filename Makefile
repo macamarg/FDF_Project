@@ -6,7 +6,7 @@
 #    By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/04 11:08:14 by macamarg          #+#    #+#              #
-#    Updated: 2024/10/02 13:45:34 by macamarg         ###   ########.fr        #
+#    Updated: 2024/10/14 14:33:30 by macamarg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC = fdf_main.c\
 	fdf_color.c\
 	fdf_draw.c\
 	fdf_free_map.c\
+	fdf_modify.c\
 
 SRC_BONUS = 
 

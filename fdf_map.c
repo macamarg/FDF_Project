@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:53:37 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/09 12:32:56 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:52:13 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@ int	is_info(char c)
 	info = 0;
 	if (44 <= c && c <= 122)
 		info = 1;
-	// if ('0' <= c && c <= '9')
-	// 	info = 1;
-	// else if (('A' <= c && c <= 'F') || ('a' <= c && c <= 'f'))
-	// 	info = 1;
-	// else if (c == '-' || c == ',' || c == 'x' || c == 'X')
-	// 	info = 1;
 	return (info);
 }
 
@@ -37,12 +31,14 @@ int	fdf_word_count(char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
+		while (line[i] == ' ')
+			i++;
 		while (is_info (line[i]) == 1)
 			i++;
-		while (line[i] == ' ' || line[i] == '\n')
-			i++;
+		i++;
 		count++;
 	}
+	ft_printf("%i\n", count);
 	return (count);
 }
 
@@ -70,8 +66,7 @@ int	fdf_check_format(t_map *map, int fd)
 	close(fd);
 	return (1);
 }
-//format decode -> julia, t1, t2
-//ajuste -> pnp
+//format draw -> julia, t1, t2
 
 void	fill_maptap(t_map *map)
 {
@@ -83,14 +78,15 @@ void	fill_maptap(t_map *map)
 		map->map_color[map->i] = ft_calloc(map->rows, sizeof(unsigned long *));
 		map->j = -1;
 		map->line_spl = ft_split (map->line, ' ');
-		ft_printf("%s\n", map->line);
-		while (++map->j < map->rows)
+		while (++map->j < map->rows &&  map->line_spl[map->j] != NULL)
 		{
 			map->map_decoded[map->i][map->j] = ft_atoi (map->line_spl[map->j]);
-			if (find_color(map->line_spl[map->j]) == 1)
-				map->map_color[map->i][map->j] = g_color(map->line_spl[map->j]);
+			map->map_color[map->i][map->j] = ft_calloc(2, sizeof(unsigned long **));
+			map->map_color[map->i][map->j][0] = find_color(map->line_spl[map->j]);
+			if (map->map_color[map->i][map->j][0] == 1)
+				map->map_color[map->i][map->j][1] = g_color(map->line_spl[map->j]);
 			else
-				map->map_color[map->i][map->j] = SDT_COLOR;
+				map->map_color[map->i][map->j][1] = STD_COLOR;
 			if (map->map_decoded[map->i][map->j] > map->z_max)
 				map->z_max = map->map_decoded[map->i][map->j];
 			if (map->map_decoded[map->i][map->j] < map->z_min)
