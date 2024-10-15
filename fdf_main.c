@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:26:43 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/14 14:25:45 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:07:01 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_fdf(int fd, char *map_file)
 {
 	t_vars	vars;
-	
 
 	ft_printf("fdf function\n");
 	vars.map = malloc(sizeof(t_map));
@@ -30,14 +29,14 @@ void	ft_fdf(int fd, char *map_file)
 			&vars.img.line_length, &vars.img.endian);
 	ft_printf("fdf drawing\n");
 	fdf_mapdraw(&vars);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);//pq 0, 0??
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 	mlx_hook(vars.win, 17, 0, kill_vars, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);
 	mlx_loop(vars.mlx);
 }
 
-void initiate_map(t_map *map)
+void	initiate_map(t_map *map)
 {
 	map->line = NULL;
 	map->lines = 0;
@@ -50,6 +49,8 @@ void initiate_map(t_map *map)
 	map->y_max = 0;
 	map->x_min = 0;
 	map->y_min = 0;
+	map->color_stat = 0;
+	map->rotation = 1;
 }
 
 int	check_mapextension(char *map_file)
@@ -73,16 +74,6 @@ int	fdf_exit(char *msg, int n_error)
 {
 	ft_putstr_fd (msg, 2);
 	exit (n_error);
-}
-
-void	free_arr(char **array, int i)
-{
-	while (i >= 0)
-	{
-		free(array[i]);
-		i--;
-	}
-	free(array);
 }
 
 int	main(int argc, char **argv)

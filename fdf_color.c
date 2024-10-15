@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:54:07 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/14 15:07:13 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:20:36 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ unsigned long	g_color(char *str)
 	return (result);
 }
 
-unsigned long	z_color(char *str)
-{
-	
-}
+// unsigned long	z_color(t_vars *vars)
+// {
+// }

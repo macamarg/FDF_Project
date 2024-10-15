@@ -6,7 +6,7 @@
 /*   By: macamarg <macamarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:27:31 by macamarg          #+#    #+#             */
-/*   Updated: 2024/10/14 15:01:16 by macamarg         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:19:19 by macamarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ typedef struct s_draw
 	int				e2;
 	int 			sx;
 	int 			sy;
+	double			pixels;
 }				t_draw;
 
 typedef struct s_map
 {
 	int				fd;
 	char			*line;
-	char			**line_spl;
+	char			**l_spl;
 	int				lines;
 	int				rows;
 	int				**map_decoded;
@@ -88,10 +89,11 @@ typedef struct s_map
 	int				scale;
 	int				x_scale;
 	int				y_scale;
-	int				zoom;
+	float			zoom;
 	int				hills;
-	int				rotation;
+	float			rotation;
 	int				shift;
+	int				color_stat;
 }					t_map;
 
 typedef struct s_vars
@@ -118,6 +120,10 @@ int		key_hook(int keycode, t_vars *vars);
 //modify
 void	fdf_uphills(t_vars *vars);
 void	fdf_downhills(t_vars *vars);
+void	fdf_modify(t_vars *vars);
+void	fdf_reinit(t_vars *vars);
+void	fdf_zoom(t_vars *vars, int factor);
+void	fdf_rotate(t_vars *vars, int factor);
 
 //main
 void	ft_fdf(int fd, char *map_file);
@@ -131,7 +137,7 @@ t_map	*get_map(t_map *map, int fd, char *map_file);
 int		fdf_word_count(char *line);
 int		fdf_check_format(t_map *map, int fd);
 int		is_info(char c);
-void	fill_maptap(t_map *map);
+void	fill_maptab(t_map *map);
 int		find_color(char *str);
 unsigned long		g_color(char *str);
 
