@@ -35,44 +35,47 @@ void	fdf_reinit(t_vars *vars)
 	vars->map->zoom = 1;
 	vars->map->hills = 1;
 	vars->map->color_stat = 0;
-	vars->map->rotation = 1;
+	vars->map->rotation_x = 0;
+	vars->map->rotation_x = 1;
+	vars->map->rotation_y = 1;
 	fdf_modify(vars);
 }
 
+// void	fdf_rotate(t_vars *vars, int factor)
+// {
+// 	if (factor == -1)
+// 		vars->map->rotation -= 1;
+// 	else if (factor == 1 )
+// 		vars->map->rotation += 1;
+// 	fdf_modify(vars);
+// }
+
 void	fdf_rotate(t_vars *vars, int factor)
 {
-	if (factor == -1 && vars->map->rotation <= 1 && vars->map->rotation > -0.8)
-		vars->map->rotation -= 0.1;
-	else if (factor == 1 && vars->map->rotation < 1
-		&& vars->map->rotation >= -0.9)
-		vars->map->rotation += 0.1;
+	if (factor == -1)
+		vars->map->rotation_x -= 0.2;
+	else if (factor == 1)
+		vars->map->rotation_y -= 0.2;
+	else if (factor == 2 )
+		vars->map->rotation += 1;
 	fdf_modify(vars);
 }
 
 void	fdf_zoom(t_vars *vars, int factor)
 {
-	int	i;
-	int	j;
-
-	i = -1;
 	vars->map->zoom += 0.1 * factor;
-	while (++i < vars->map->lines)
-	{
-		j = -1;
-		while (++j < vars->map->rows)
-		{
-			vars->map->map_2d[i][j][0] -= WIGTH / 16;
-			vars->map->map_2d[i][j][0] *= vars->map->zoom;
-			vars->map->map_2d[i][j][1] -= HEIGTH / 16;
-			vars->map->map_2d[i][j][1] *= vars->map->zoom;
-		}
-	}
-	mlx_destroy_image(vars->mlx, vars->img.img);
-	vars->img.img = mlx_new_image(vars->mlx, WIGTH, HEIGTH);
-	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
-			&vars->img.line_length, &vars->img.endian);
-	fdf_mapdraw(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	vars->map->shift_x -= 0.1 * factor;
+	vars->map->shift_y += 0.1 * factor;
+	fdf_modify(vars);
+}
+
+void	fdf_shift(t_vars *vars, int factor, char c)
+{
+	if (c == 'x')
+		vars->map->shift_x += factor;
+	else if (c == 'y')
+		vars->map->shift_y += factor;
+	fdf_modify(vars);
 }
 
 void	fdf_modify(t_vars *vars)

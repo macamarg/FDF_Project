@@ -23,8 +23,8 @@ void	*convert_map(t_map	*map)
 		while (++map->j < map->rows)
 		{
 			map->map_2d[map->i][map->j] = ft_calloc(2, sizeof(float));
-			map->xf = (map->i - map->j) * cosf(STD_ANG);
-			map->yf = (map->i + map->j) * sinf(STD_ANG);
+			map->xf = (map->i - map->j) * cosf(STD_ANG * map->rotation_x);
+			map->yf = (map->i + map->j) * sinf(STD_ANG * map->rotation_y);
 			map->yf -= 0.1 * map->hills * map->map_decoded[map->i][map->j];
 			if (map->x_max <= map->xf)
 				map->x_max = map->xf;
@@ -41,7 +41,39 @@ void	*convert_map(t_map	*map)
 	return (map);
 }
 
-void	*map_fit(t_map	*map)
+void	map_fit(t_map	*map)
+{
+	float angle;
+	
+	map->x_fit = (WIGTH / (map->x_max - map->x_min)) * (0.7 + map->zoom);
+	map->y_fit = (HEIGTH / (map->y_max - map->y_min)) * (0.7 + map->zoom);
+	map->i = -1;
+	angle = map->rotation * ROT_ANGLE;
+	while (++map->i < map->lines)
+	{
+		map->j = -1;
+		while (++map->j < map->rows)
+		{
+			map->xf = map->map_2d[map->i][map->j][0];
+			map->yf = map->map_2d[map->i][map->j][1];
+			//map->xf -= (map->x_max - map->x_min)/2;
+			//map->yf -= (map->y_max - map->y_min)/2;
+			map->x_rotated = map->xf * cosf(angle) - map->yf * sinf(angle);
+			map->y_rotated = map->xf * sinf(angle) + map->yf * cosf(angle);
+			map->x_rotated *= map->x_fit;
+			map->y_rotated *= map->y_fit;
+			//map->y_rotated += HEIGTH / 2;;
+			map->x_rotated += map->shift_x * map->x_fit * 15;
+			map->y_rotated += map->shift_y * map->y_fit * 5;
+			//map->x_rotated += 4 * WIGTH / 7;
+			//map->y_rotated += HEIGTH / 2;
+			map->map_2d[map->i][map->j][0] = map->x_rotated;
+			map->map_2d[map->i][map->j][1] = map->y_rotated;
+		}
+	}
+}
+
+/* void	*map_fit(t_map	*map)
 {
 	map->i = -1;
 	map->x_fit = 3 * (WIGTH / (map->x_max - map->x_min)) / 4;
@@ -65,4 +97,4 @@ void	*map_fit(t_map	*map)
 	}
 	ft_printf("map converted\n");
 	return (map);
-}
+} */

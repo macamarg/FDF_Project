@@ -27,7 +27,7 @@
 # define ORANGE 0xff8b00
 # define YELLOW 0xffe957
 # define STD_ANG 0.523599
-# define X_ANGLE 0.523599
+# define ROT_ANGLE 0.2618
 # define Y_ANGLE 0.523599
 # define OFFSET_X 400
 # define OFFSET_Y 400
@@ -45,8 +45,8 @@ typedef struct s_draw
 {
 	int				i;
 	int				j;
-	int				stepx;
-	int				stepy;
+	float			stepx;
+	float			stepy;
 	int				*s;
 	int				*e;
 	unsigned long	*color;
@@ -92,7 +92,13 @@ typedef struct s_map
 	float			zoom;
 	int				hills;
 	float			rotation;
-	int				shift;
+	float 			x_rotated;
+	float			y_rotated;
+	float			rotation_x;
+	float			rotation_y;
+	float			rotation_z;
+	float			shift_x;
+	float			shift_y;
 	int				color_stat;
 }					t_map;
 
@@ -123,6 +129,7 @@ void	fdf_downhills(t_vars *vars);
 void	fdf_modify(t_vars *vars);
 void	fdf_reinit(t_vars *vars);
 void	fdf_zoom(t_vars *vars, int factor);
+void	fdf_shift(t_vars *vars, int factor, char c);
 void	fdf_rotate(t_vars *vars, int factor);
 
 //main
@@ -143,7 +150,7 @@ unsigned long		g_color(char *str);
 
 //convert map into info to draw image
 void	*convert_map(t_map	*map);
-void	*map_fit(t_map	*map);
+void	map_fit(t_map	*map);
 void	*range_of_z(t_map	*map);
 
 //freemap

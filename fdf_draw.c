@@ -33,7 +33,7 @@ void	draw_line(t_vars *vars, t_draw dm)
 	{
 		dm.sx = (5 * WIGTH / 7) - dm.s[0];
 		dm.sy = dm.s[1];
-		if ((dm.sx >= 0 && dm.sx <= WIGTH) && (dm.sy >= 0 && dm.sy <= HEIGTH))
+		if ((dm.sx > 0 && dm.sx < WIGTH) && (dm.sy > 0 && dm.sy < HEIGTH))
 			my_mlx_pixel_put(&vars->img, dm.sx, dm.sy, dm.color[0]);
 		dm.e2 = 2 * dm.err;
 		if (dm.e2 >= dm.dy)
@@ -47,29 +47,30 @@ void	draw_line(t_vars *vars, t_draw dm)
 			dm.s[1] += dm.stepy;
 		}
 	}
-}
+} 
 
-// void	draw_line(t_vars *vars, t_draw dm)
-// {
-// 	dm.dx = (dm.s[0] - dm.e[0]);
-// 	dm.dy = (dm.s[1] - dm.e[1]);
-// 	dm.pixels = sqrt((dm.dx * dm.dx)+(dm.dy * dm.dy));
-// 	dm.stepx = 1;
-// 	dm.stepy = 1;
-// 	if (dm.s[0] > dm.e[0])
-// 		dm.stepx = -1;
-// 	if(dm.s[1] > dm.e[1])
-// 		dm.stepy = -1;
-// 	while(dm.pixels >= 0)
-// 	{
-// 		dm.sx = (5 * WIGTH / 7) - dm.s[0];
-// 		dm.sy = dm.s[1];
-// 		if((dm.sx >= 0 && dm.sx <= WIGTH) && (dm.sy >= 0 && dm.sy <= HEIGTH))
-// 			my_mlx_pixel_put(&vars->img, dm.sx, dm.sy, dm.color[0]);
-// 		dm.s[0] += dm.stepx;
-// 		dm.s[1] += dm.stepy;
-// 	}
-// }
+/* void	draw_line(t_vars *vars, t_draw dm)
+{
+	int i;
+
+	i = 0;
+	dm.dx = (dm.e[0] - dm.s[0]);
+	dm.dy = (dm.e[1] - dm.s[1]);
+	dm.pixels = sqrt((dm.dx * dm.dx) + (dm.dy * dm.dy));
+	dm.stepx = dm.dx / dm.pixels;
+	dm.stepy = dm.dy / dm.pixels;
+	while(i <= dm.pixels)
+	{
+		dm.sx = (5 * WIGTH / 7) - dm.s[0];
+		dm.sy = dm.s[1];
+		if((dm.sx >= 0 && dm.sx <= WIGTH) && (dm.sy >= 0 && dm.sy <= HEIGTH))
+			my_mlx_pixel_put(&vars->img, dm.sx, dm.sy, dm.color[0]);
+		dm.s[0] += dm.stepx;
+		dm.s[1] += dm.stepy;
+
+		i++;
+	}
+} */
 
 void	draw_vert(t_vars *vars, t_draw dm)
 {

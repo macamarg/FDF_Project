@@ -28,23 +28,32 @@ int	kill_vars(t_vars *vars)
 int	key_hook(int keycode, t_vars *vars)
 {
 	printf("%i!\n", keycode);
-	if (keycode == 65451)
-		fdf_uphills(vars);
-	else if (keycode == 65453)
-		fdf_downhills(vars);
-	else if (keycode == 100)
-		fdf_rotate(vars, -1);
+	if (keycode == 104)
+		fdf_uphills(vars);//h
+	else if (keycode == 106)
+		fdf_downhills(vars);//j
+	else if (keycode == 114)
+		fdf_rotate(vars, -1);//r
 	else if (keycode == 101)
-		fdf_rotate(vars, 1);
+		fdf_rotate(vars, 1);//e
+	else if (keycode == 116)
+		fdf_rotate(vars, 2);//t
 	else if (keycode == 122)
-		fdf_zoom(vars, 1);
+		fdf_zoom(vars, 1);//z
+	else if (keycode == 120)
+		fdf_zoom(vars, -1);//x
 	else if (keycode == 32)
-		fdf_reinit(vars);
+		fdf_reinit(vars);//space
+	else if (keycode == 100)
+		fdf_shift(vars, -1, 'x');//d
+	else if (keycode == 97)
+		fdf_shift(vars, 1, 'x');//a
+	else if (keycode == 119)
+		fdf_shift(vars, -1, 'y');//w
+	else if (keycode == 115)
+		fdf_shift(vars, 1, 'y');//s
 	else if (keycode == 65307)
-	{
-		ft_printf("ESC!\n");
-		kill_vars(vars);
-	}
+		kill_vars(vars);//esc
 	return (0);
 }
 

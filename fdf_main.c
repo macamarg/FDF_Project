@@ -43,14 +43,18 @@ void	initiate_map(t_map *map)
 	map->i = -1;
 	map->z_max = 0;
 	map->z_min = 0;
-	map->zoom = 1;
+	map->zoom = 0;
 	map->hills = 1;
 	map->x_max = 0;
 	map->y_max = 0;
 	map->x_min = 0;
 	map->y_min = 0;
 	map->color_stat = 0;
-	map->rotation = 1;
+	map->rotation = 0;
+	map->rotation_x = 1;
+	map->rotation_y = 1;
+	map->shift_x = 1;
+	map->shift_y = 1;
 }
 
 int	check_mapextension(char *map_file)
