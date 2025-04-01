@@ -1,15 +1,33 @@
-FdF
+# FDF - Wireframe Model
 
+## About
+FDF ("fil de fer" - wireframe in French) is a 42 School project that creates a simplified 3D wireframe representation of a landscape from elevation data. The program reads coordinate points from a `.fdf` file and renders them in isometric projection using the MiniLibX graphics library.
 This project is about representing a landscape as a 3D object
 in which all surfaces are outlined in lines.
 
-The program has to represent the model in isometric projection
 
-![image](https://github.com/user-attachments/assets/40a68252-c5fa-4960-962d-b37eb2a9c846)
 
-Isometric projection with rotation and scale alteration
+## Features
+### Mandatory
+- Parses `.fdf` map files containing elevation data
+- Renders 3D wireframe models in isometric projection
+- Smooth window management with MiniLibX
+- Clean exit on ESC key or window close
+- Memory leak-free implementation
 
-![image](https://github.com/user-attachments/assets/7836f63b-ed23-4610-9f20-3ef6bb6497e0)
+### Bonus (if implemented)
+- [ ] Additional projections (parallel/conic)
+- [:ballot_box_with_check:] Zoom functionality
+- [:ballot_box_with_check:] Model translation
+- [:ballot_box_with_check:] Model rotation
+- [:ballot_box_with_check:] Reset to initial configurations
+
+
+
+
+*Isometric projection with rotation and scale alteration*
+
+
 
 
 

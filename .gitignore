@@ -1,6 +1,7 @@
 *.o
 *.a
-fdf
+./fdf
+./fdf_bonus
 
 # Executables
 *.exe
@@ -9,3 +10,6 @@ fdf
 *.i*86
 *.x86_64
 *.hex
+
+#Images
+*.png

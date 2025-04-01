@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "./libft/libft.h"
+#include "../fdf.h"
+#include "../libft/libft.h"
 
 int	kill_vars(t_vars *vars)
 {

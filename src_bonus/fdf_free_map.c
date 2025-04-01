@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 /*free int **map_decoded, int **map color, int *z_range, int **map2d */
 

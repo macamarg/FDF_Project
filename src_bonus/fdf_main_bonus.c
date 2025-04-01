@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf_bonus.h"
 
 void	ft_fdf(int fd, char *map_file)
 {

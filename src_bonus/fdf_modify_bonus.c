@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf_bonus.h"
 
 void	fdf_hills(t_vars *vars, int factor)
 {

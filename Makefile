@@ -14,29 +14,33 @@ NAME = fdf
 
 NAME_BONUS = fdf_bonus
 
-SRC = fdf_main.c\
-	fdf_map.c\
-	fdf_map_covert.c\
-	fdf_hooks.c\
-	fdf_color.c\
-	fdf_draw.c\
-	fdf_free_map.c\
-	fdf_modify.c\
+SRC_DIR = ./src
 
-SRC_BONUS = fdf_main_bonus.c\
-	fdf_map_bonus.c\
-	fdf_map_covert_bonus.c\
-	fdf_hooks_bonus.c\
-	fdf_color_bonus.c\
-	fdf_draw_bonus.c\
-	fdf_free_map_bonus.c\
-	fdf_modify_bonus.c\
+BONUS_DIR = ./src_bonus
+
+SRC = $(SRC_DIR)/fdf_main.c\
+	$(SRC_DIR)/fdf_map.c\
+	$(SRC_DIR)/fdf_map_covert.c\
+	$(SRC_DIR)/fdf_hooks.c\
+	$(SRC_DIR)/fdf_color.c\
+	$(SRC_DIR)/fdf_draw.c\
+	$(SRC_DIR)/fdf_free_map.c\
+	$(SRC_DIR)/fdf_modify.c\
+
+SRC_BONUS = $(BONUS_DIR)/fdf_main_bonus.c\
+	$(BONUS_DIR)/fdf_map_bonus.c\
+	$(BONUS_DIR)/fdf_map_covert_bonus.c\
+	$(BONUS_DIR)/fdf_hooks_bonus.c\
+	$(BONUS_DIR)/fdf_color_bonus.c\
+	$(BONUS_DIR)/fdf_draw_bonus.c\
+	$(BONUS_DIR)/fdf_free_map_bonus.c\
+	$(BONUS_DIR)/fdf_modify_bonus.c\
 
 LIBFT_DIR = ./libft
 
 MINILIBX_DIR = ./minilibx-linux
 
-WFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+WFLAGS = -Wall -Wextra -Werror -g 
 
 FLAGS = -lmlx_Linux -lX11 -lXext -lm
 
@@ -51,27 +55,29 @@ CC = cc
 all: $(NAME)
 
 $(NAME):$(SRC)
-	make -C $(LIBFT_DIR) all
-	make -C $(MINILIBX_DIR)
-	$(CC) $(WFLAGS) $^ $(LIB) $(LIBFT_A) $(FLAGS) -o $@ 
+	@make -C $(LIBFT_DIR) all
+	@make -C $(MINILIBX_DIR)
+	@$(CC) $(WFLAGS) $^ $(LIB) $(LIBFT_A) $(FLAGS) -o $@
+	@echo "Compilation finished! Executable '$(NAME)' is ready."
 
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS):$(SRC_BONUS)
-	make -C $(LIBFT_DIR) all
-	make -C $(MINILIBX_DIR)
-	$(CC) $(WFLAGS) $^ $(LIB) $(LIBFT_A) $(FLAGS) -o $@ 
+	@make -C $(LIBFT_DIR) all
+	@make -C $(MINILIBX_DIR)
+	@$(CC) $(WFLAGS) $^ $(LIB) $(LIBFT_A) $(FLAGS) -o $@ 
 
 clean:
-	make -C $(LIBFT_DIR) clean
-	make -C $(MINILIBX_DIR) clean
+	@make -C $(LIBFT_DIR) clean
+	@echo "*.o were cleaned."
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
-	make -C $(MINILIBX_DIR) fclean
+	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean
+	@echo "Executable '$(NAME)' was removed."
+	
 	
 valgrind:
-	valgrind --track-fds=yes --show-leak-kinds=all --leak-check=full $(NAME)
+	valgrind --track-fds=yes --show-leak-kinds=all --leak-check=full ./$(NAME_BONUS) 42.fdf
 
 re: fclean all

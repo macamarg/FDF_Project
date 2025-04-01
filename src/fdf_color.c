@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 int	find_color(char *str)
 {
@@ -43,7 +43,3 @@ long	g_color(char *str)
 	}
 	return (result);
 }
-
-// unsigned long	z_color(t_vars *vars)
-// {
-// }
