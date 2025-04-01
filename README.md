@@ -5,6 +5,7 @@ FDF ("fil de fer" - wireframe in French) is a 42 School project that creates a s
 This project is about representing a landscape as a 3D object
 in which all surfaces are outlined in lines.
 
+![image](https://github.com/user-attachments/assets/8411541d-14c5-4621-a680-91aead2d9d7c)
 
 
 ## Features
@@ -16,17 +17,18 @@ in which all surfaces are outlined in lines.
 - Memory leak-free implementation
 
 ### Bonus (if implemented)
-- [ ] Additional projections (parallel/conic)
-- [:ballot_box_with_check:] Zoom functionality
-- [:ballot_box_with_check:] Model translation
-- [:ballot_box_with_check:] Model rotation
-- [:ballot_box_with_check:] Reset to initial configurations
+-  :x: Additional projections (parallel/conic)
+-  :ballot_box_with_check: Zoom functionality
+-  :ballot_box_with_check:  Model translation
+-  :ballot_box_with_check:  Model rotation
+-  :ballot_box_with_check:  Reset to initial configurations
 
 
 
 
 *Isometric projection with rotation and scale alteration*
 
+![image](https://github.com/user-attachments/assets/243a5470-4cbd-4b5d-bf1d-0cd0c8c92a2f)
 
 
 
